@@ -53,7 +53,7 @@ jobs:
       env:
         CC: ${{ matrix.compiler }}
       run: |
-         docker run --rm -v `pwd`:`pwd` -w `pwd` ${{ env.img }} make -j4 
+         docker run --rm -v `pwd`:`pwd` -w `pwd` ${{ env.img }} /bin/bash -c "make -j4 && ./v -cc $CC -o v -prod cmd/v && ./v -prod cmd/tools/vup.v && ./v -prod cmd/tools/vdoctor.v" 
     - name: Create artifact
       uses: actions/upload-artifact@v2
       with:
