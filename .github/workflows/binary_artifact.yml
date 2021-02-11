@@ -45,13 +45,12 @@ jobs:
       id: qemu
       uses: docker/setup-qemu-action@v1
     - run: |
-          docker run --rm --privileged --platform=linux/arm64 ubuntu:latest
+          docker run -it --privileged --platform=linux/arm64 ubuntu:latest bash
     - uses: actions/checkout@v1
     - name: Compile
       env:
         CC: ${{ matrix.compiler }}
       run: |
-         docker run --rm --privileged --platform=linux/arm64 ubuntu:latest
          make -j4
          ./v -cc $CC -o v -prod cmd/v 
          ./v -prod cmd/tools/vup.v 
