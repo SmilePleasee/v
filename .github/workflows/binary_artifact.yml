@@ -57,7 +57,7 @@ jobs:
     - name: Create artifact
       uses: actions/upload-artifact@v2
       with:
-        name: linux-arm64
+        name: linux_arm64
         path: |
           .
           ./cmd/tools/vup
@@ -68,7 +68,7 @@ jobs:
     - name: Create binary only artifact
       uses: actions/upload-artifact@v2
       with:
-        name: linux-arm64-binary
+        name: linux_arm64-binary
         path: ./v
 
   build-macos:
@@ -156,7 +156,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        version: [linux-arm64, linux, macos, windows]
+        version: [linux_arm64, linux, macos, windows]
     steps:
     - uses: actions/checkout@v1
     - name: Fetch artifacts
