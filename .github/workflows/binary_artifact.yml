@@ -41,16 +41,17 @@ jobs:
       matrix:
         compiler: [gcc]
     steps:
-    - uses: actions/checkout@v1
     - name: Set up QEMU
       id: qemu
       uses: docker/setup-qemu-action@v1
     - run: |
           docker run --rm --privileged --platform=linux/arm64 ubuntu:latest
+    - uses: actions/checkout@v1
     - name: Compile
       env:
         CC: ${{ matrix.compiler }}
       run: |
+         docker run --rm --privileged --platform=linux/arm64 ubuntu:latest
          make -j4
          ./v -cc $CC -o v -prod cmd/v 
          ./v -prod cmd/tools/vup.v 
