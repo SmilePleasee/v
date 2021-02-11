@@ -40,6 +40,7 @@ jobs:
     strategy:
       matrix:
         compiler: [gcc]
+        arch: [aarch64]
     steps:
     - uses: actions/checkout@v1
     - name: Set up QEMU
