@@ -45,6 +45,9 @@ jobs:
     - name: Set up QEMU
       id: qemu
       uses: docker/setup-qemu-action@v1
+      with:
+        image: tonistiigi/binfmt:latest
+        platforms: arm64
     - name: Available platforms
       run: echo ${{ steps.qemu.outputs.platforms }}
     - name: Compile
