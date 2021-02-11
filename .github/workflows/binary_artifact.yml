@@ -53,7 +53,7 @@ jobs:
         CC: ${{ matrix.compiler }}
       run: |
          docker run --rm -v `pwd`:`pwd` -w `pwd` \
-          ${{ env.img }} -m \
+          ${{ env.img }} \
          make -j4 \
          ./v -cc $CC -o v -prod cmd/v \
          ./v -prod cmd/tools/vup.v \
