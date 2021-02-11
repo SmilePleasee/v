@@ -59,7 +59,7 @@ jobs:
     - name: Create artifact
       uses: actions/upload-artifact@v2
       with:
-        name: linux
+        name: linux-arm64
         path: |
           .
           ./cmd/tools/vup
