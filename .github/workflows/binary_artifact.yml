@@ -43,7 +43,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - run: |
-          docker run --rm --privileged hypriot/qemu-register
+          docker run --rm --privileged --platform=linux/arm64 hypriot/qemu-register
     - name: Compile
       env:
         CC: ${{ matrix.compiler }}
