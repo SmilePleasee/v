@@ -42,6 +42,9 @@ jobs:
         compiler: [gcc]
     steps:
     - uses: actions/checkout@v1
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
     - run: |
           docker run --rm --privileged --platform=linux/arm64 ubuntu:latest
     - name: Compile
