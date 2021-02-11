@@ -40,20 +40,23 @@ jobs:
     strategy:
       matrix:
         compiler: [gcc]
+    env:
+      img: quay.io/pypa/manylinux2014_aarch64
     steps:
+    - name: Checkout
+      uses: actions/checkout@v1
     - name: Set up QEMU
       id: qemu
-      uses: docker/setup-qemu-action@v1
-    - run: |
-          docker run -it --rm --privileged --platform=linux/arm64 ubuntu:latest
-    - uses: actions/checkout@v1
+      uses: docker/setup-qemu-action@v2
     - name: Compile
       env:
         CC: ${{ matrix.compiler }}
       run: |
-         make -j4
-         ./v -cc $CC -o v -prod cmd/v 
-         ./v -prod cmd/tools/vup.v 
+         docker run --rm -v `pwd`:`pwd` -w `pwd` \
+          ${{ env.img }} -m \
+         make -j4 \
+         ./v -cc $CC -o v -prod cmd/v \
+         ./v -prod cmd/tools/vup.v \
          ./v -prod cmd/tools/vdoctor.v
     - name: Create artifact
       uses: actions/upload-artifact@v2
