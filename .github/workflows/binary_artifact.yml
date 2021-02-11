@@ -45,7 +45,7 @@ jobs:
       id: qemu
       uses: docker/setup-qemu-action@v1
     - run: |
-          docker run -it --privileged --platform=linux/arm64 ubuntu:latest bash
+          docker run -it --rm --privileged --platform=linux/arm64 ubuntu:latest
     - uses: actions/checkout@v1
     - name: Compile
       env:
